@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    table{
+        margin: 0 auto;
+        border-collapse: collapse;
+        text-align: center;
+        border-collapse: collapse;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+        th {
+            background-color: #f2f2f2;
+            border-bottom: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f2f2f2;
+        }
+
+        td {
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+</style>
+<body>
+    <table border="1" cellpadding="10" width="45%" cellspacing="0">
+        <thead><th colspan="2" align="center">ASCII Codes</thead>
+        {% for num,char in param2 %}
+        <tr>
+        <td>{{num}}</td>
+        <td>{{char}}</td></tr>
+    {% endfor %}
+        
+    </table>
+   
+</body>
+</html>

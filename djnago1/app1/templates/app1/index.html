@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factorial</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 300px;
+            text-align: center;
+        }
+
+        .heading {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+
+        #myform input[type="number"] {
+            width: calc(100% - 22px); /* Adjusted width */
+            padding: 10px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        #myform button[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        #myform button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .show {
+            margin-top: 20px;
+        }
+
+        .show h3 {
+            margin: 0;
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="heading">Factorial</div>
+        <form id="myform" method="post">
+            {% csrf_token %}
+            {{form.as_p}}
+            <button type="submit">Find Factorial</button>
+        </form>
+        <div class="show"></div>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $('#myform').submit(function(event) {
+                event.preventDefault();
+                var formData = new FormData(this);
+                $.ajax({
+                    url: '/app1/fact',
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        if (response.param1) {
+                            var element = "<pre><code>The factorial of " + formData.get('select') + " is " + response.param1 + "</pre></code>"
+                            $('.show').html(element);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error:', error);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
